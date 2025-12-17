@@ -17,7 +17,7 @@ export const ConfigBlock: React.FC<{ source: string }> = async ({ source }) => {
       <Card>
         <CardContent>
           <div className='flex items-center justify-between'>
-            <p>Config Block - source: {source}</p>
+						<h2 className="font-sans font-medium h2-core">Sales Channels</h2>
             <div>
               <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
