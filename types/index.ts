@@ -1,9 +1,8 @@
 /**
  * Strapi Dynamic Zone-ийн type definitions
- * 
+ *
  * Strapi дээрээс ирсэн API response-уудын структурыг тодорхойлдог.
  */
-
 
 export interface SidebarProps {
   pages: PageResponse[];
@@ -12,7 +11,6 @@ export interface SidebarProps {
 export interface PageBlock {
   __component: string;
   id: string;
-  [key: string]: any;
 }
 
 export interface PageResponse {
@@ -25,28 +23,6 @@ export interface PageResponse {
   updatedAt?: string;
 }
 
-// UserTable Widget Props
-export interface UserTableProps {
-  data: {
-    title: string;
-    limit: number;
-    [key: string]: any;
-  };
-}
-
-// RevenueChart Widget Props
-export interface RevenueChartProps {
-  data: {
-    title: string;
-    currency: string;
-    [key: string]: any;
-  };
-}
-
-// Generic Block Component Props
-export interface BlockComponentProps {
-  data: Record<string, any>;
-}
 
 // Mock User Data Type
 export interface MockUser {
@@ -63,3 +39,39 @@ export interface RevenueDataPoint {
   month: string;
   revenue: number;
 }
+
+export interface NcPage {
+  Id: string;
+  title: string;
+  slug: string;
+  enabled: boolean;
+}
+
+export interface NcMenu {
+  Id: string;
+  id: string;
+  title: string;
+  slug: string;
+  content?: PageBlock[];
+  blocks?: PageBlock[];
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface NcBlock {
+  Id: string;
+  id: string;
+  title: string;
+  source: string;
+  page: string;
+  type: string;
+}
+
+// Re-export NocoDB types
+export type {
+  NocoDBColumn,
+  NocoDBRow,
+  NocoDBListResponse,
+  NocoDBBase,
+  NocoDBTable,
+} from './nocodb_data';

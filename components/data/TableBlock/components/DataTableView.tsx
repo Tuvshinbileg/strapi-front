@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { NocoDBColumn, NocoDBRow } from '@/services/nocodb'
+import { NocoDBColumn, NocoDBRow } from '@/types/index'
 import { TableRowActions } from './TableRowActions'
 import { formatCellValue } from '../utils/formatters'
 

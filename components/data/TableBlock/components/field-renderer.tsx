@@ -13,8 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import type { NocoDBColumn } from '@/services/nocodb'
-import { NocoDBService } from '@/services/nocodb'
+import type { NocoDBColumn } from '@/types/index'
+import { nocoDbApiService } from '@/lib/noco_api'
 import { Upload, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
@@ -319,7 +319,6 @@ function RelationalSelectField({
   }
 
   const valueId = getValueId(value)
-  console.log(valueId)
 
   useEffect(() => {
     const fetchRelatedData = async () => {
@@ -329,10 +328,9 @@ function RelationalSelectField({
 
         // Get relational model ID and base ID from column options
         const relatedModelId = column.colOptions.fk_related_model_id
-        const baseId = column.base_id
 
         // Fetch related records
-        const rows = await NocoDBService.getRelatedRecords(relatedModelId)
+        const rows = await nocoDbApiService.getRelatedRecords(relatedModelId)
 
         // Transform rows to { id, title } format
         // Try to find a suitable display column (name, title, etc.)

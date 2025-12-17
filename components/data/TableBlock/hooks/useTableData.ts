@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { NocoDBRow } from '@/services/nocodb'
+import { NocoDBRow } from '@/types/index'
 
 interface UseTableDataProps {
   source: string

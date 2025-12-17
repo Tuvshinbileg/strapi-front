@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
-import { NocoDBColumn, NocoDBRow } from '@/services/nocodb'
+import { useState } from 'react'
+import { NocoDBColumn, NocoDBRow } from '@/types/nocodb_data'
 import { DynamicForm } from './DynamicForm'
 import { TableToolbar } from './components/TableToolbar'
 import { DataTableView } from './components/DataTableView'
@@ -25,7 +25,7 @@ export function DataTable({ source, columns, initialRows }: DataTableProps) {
   // Helper to extract row ID - tries both column_name and title
   const getRowId = (row: NocoDBRow) => {
     if (!pkColumn) return row['id'] || row['Id']
-    return row[pkColumn.column_name] ?? row[pkColumn.title] ?? row['id'] ?? row['Id']
+    return (pkColumn.column_name ? row[pkColumn.column_name] : undefined) ?? (pkColumn.title ? row[pkColumn.title] : undefined) ?? row['id'] ?? row['Id']
   }
   // Use custom hook for data operations
   const {

@@ -1,12 +1,11 @@
 import React from 'react'
-import type { TableBlock as TableBlockProps } from 'src/payload-types'
-import NocoDBService from '@/services/nocodb'
+import { nocoDbApiService } from '@/lib/noco_api';
+
 import { DataTable } from './DataTable'
 import { getVisibleColumns } from './utils/formatters'
 import { Card, CardContent } from '@/components/ui/card'
-type Props = { source?: string } & TableBlockProps
 
-export const TableBlock: React.FC<Props> = async ({ source }) => {
+export const TableBlock: React.FC<{ source: string }> = async ({ source }) => {
   // Validate source
   if (!source) {
     return (
@@ -23,7 +22,7 @@ export const TableBlock: React.FC<Props> = async ({ source }) => {
 
   try {
     // Find table by name across all bases
-    const tableInfo = await NocoDBService.findTableByName(source)
+    const tableInfo = await nocoDbApiService.findTableByName(source)
 
     if (!tableInfo) {
       return (
@@ -43,8 +42,8 @@ export const TableBlock: React.FC<Props> = async ({ source }) => {
 
     // Fetch columns and rows in parallel
     const [tableMetaData, rowsData] = await Promise.all([
-      NocoDBService.getTableMetadata(tableId),
-      NocoDBService.getRows(baseId, tableId, { limit: 100 }),
+      nocoDbApiService.getTableMetadata(tableId),
+      nocoDbApiService.getRows(baseId, tableId, { limit: 100 }),
     ])
 
     const columns = tableMetaData?.columns

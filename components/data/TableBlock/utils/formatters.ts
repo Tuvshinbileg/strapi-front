@@ -1,4 +1,4 @@
-import { NocoDBColumn } from '@/services/nocodb'
+import { NocoDBColumn } from '@/types/index'
 
 /**
  * Format cell value for display based on column type

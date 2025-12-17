@@ -9,7 +9,6 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
@@ -21,6 +20,7 @@ const data = {
     {
       title: "Dashboard",
       url: "#",
+      icon: "layout-dashboard",
       items: [
         {
           title: "Project Structure",
@@ -31,11 +31,8 @@ const data = {
     {
       title: "Building Your Application",
       url: "#",
+      icon: "file-text",
       items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
         {
           title: "Data Fetching",
           url: "#",
@@ -46,11 +43,13 @@ const data = {
   ],
 }
 
-import { SidebarProps } from '@/types';
+import { nocoDbApiService } from '@/lib/noco_api';
+import { MenuButton } from '@/components/MenuButton';
 
-export function AppSidebar({ el, ...props }: React.ComponentProps<typeof Sidebar> & { el:SidebarProps }) {
+export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const ncMenu = await nocoDbApiService.getMenus();
+
   return (
-    console.log('EL', el),
     <Sidebar {...props}>
       <SidebarHeader>
         <VersionSwitcher
@@ -65,27 +64,30 @@ export function AppSidebar({ el, ...props }: React.ComponentProps<typeof Sidebar
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
-                    </SidebarMenuButton>
+                {item.items.map((subItem) => (
+                  <SidebarMenuItem key={subItem.title}>
+                    <MenuButton 
+                      href={subItem.url} 
+                      title={subItem.title}
+                      icon={item.icon}
+                    />
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
-
         ))}
           <SidebarGroup>
-            <SidebarGroupLabel>STRAPI</SidebarGroupLabel>
+            <SidebarGroupLabel>NOCODB</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-               {el.pages.data.map((page) => (
-                  <SidebarMenuItem key={page.id}>
-                    <SidebarMenuButton asChild isActive={false}>
-                      <a href={`/${page.slug}`}>{page.title}</a>
-                    </SidebarMenuButton>
+               {ncMenu.map((menu) => (
+                  <SidebarMenuItem key={menu.Id}>
+                    <MenuButton 
+                      href={menu.slug} 
+                      title={menu.title}
+                      icon="database"
+                    />
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
