@@ -37,8 +37,10 @@ export default function RootLayout({
           <SidebarInset>
             <Appheader />
             <div className='flex flex-1 flex-col gap-4 p-4 bg-muted/50'>
-              <div className=' min-h-[100vh] flex-1 rounded-xl md:min-h-min container mx-auto p-6'>
-                {children}
+              <div className='min-h-[100vh] flex-1 rounded-xl md:min-h-min w-full mx-auto p-6'>
+                <div className='flex w-full flex-col items-start gap-x-4 gap-y-3 xl:grid xl:grid-cols-[minmax(0,_1fr)_440px]'>
+                  {children}
+                </div>
               </div>
             </div>
           </SidebarInset>

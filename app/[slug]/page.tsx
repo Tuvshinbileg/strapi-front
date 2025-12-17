@@ -15,6 +15,7 @@
 import { NcPage } from '@/types';
 import { nocoDbApiService } from '@/lib/noco_api';
 import { TableBlock } from '@/components/data/TableBlock/Component';
+import { ConfigBlock } from '@/components/data/ConfigBlock/Component';
 
 /**
  * Page Component - Next.js App Router dynamic route handler
@@ -37,19 +38,26 @@ export default async function Page({
   const blocks = await nocoDbApiService.getPageBlocks(page.Id);
 
   return (
-    <div>
-      {blocks && blocks.length > 0 ? (
-        blocks.map((element) => (
-          <TableBlock key={element.Id} source={element.source} />
-        ))
-      ) : (
-        <div className='text-center py-12'>
-          <p className='text-gray-500 text-lg'>
-            Энэ хуудасд блок нэмэгдээгүй байна.
-          </p>
-        </div>
-      )}
-    </div>
+    <>
+      <div className='flex w-full min-w-0 flex-col gap-y-3'>
+        {blocks && blocks.length > 0 ? (
+          blocks.map((element) => (
+            <TableBlock key={element.Id} source={element.source} />
+          ))
+        ) : (
+          <div className='text-center py-12'>
+            <p className='text-gray-500 text-lg'>
+              Энэ хуудасд блок нэмэгдээгүй байна.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className='flex w-full flex-col gap-y-3 xl:mt-0'>
+        <ConfigBlock source={page.Id} />
+
+      </div>
+    </>
   );
 }
 

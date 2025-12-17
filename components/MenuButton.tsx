@@ -1,6 +1,6 @@
 /**
  * components/MenuButton.tsx - Active menu highlighting component
- * 
+ *
  * usePathname hook ашиглан current route дээр үндэслэн active state үзүүлнэ
  */
 
@@ -21,12 +21,17 @@ interface MenuButtonProps {
 const iconMap: { [key: string]: LucideIcon } = {
   'layout-dashboard': LayoutDashboard,
   'file-text': FileText,
-  'database': Database,
+  database: Database,
 };
 
-export function MenuButton({ href, title, icon, isExternalLink = false }: MenuButtonProps) {
+export function MenuButton({
+  href,
+  title,
+  icon,
+  isExternalLink = false,
+}: MenuButtonProps) {
   const pathname = usePathname();
-  
+
   // Current route нь menu href-тай тэнцүү эсэх шалгана
   const isActive = pathname === href || pathname.startsWith(href + '/');
 
@@ -35,8 +40,8 @@ export function MenuButton({ href, title, icon, isExternalLink = false }: MenuBu
   if (isExternalLink) {
     return (
       <SidebarMenuButton asChild isActive={isActive}>
-        <a href={href} target="_blank" rel="noopener noreferrer">
-          {IconComponent && <IconComponent className="w-4 h-4" />}
+        <a href={href} target='_blank' rel='noopener noreferrer'>
+          {IconComponent && <IconComponent className='w-4 h-4' />}
           <span>{title}</span>
         </a>
       </SidebarMenuButton>
@@ -45,8 +50,8 @@ export function MenuButton({ href, title, icon, isExternalLink = false }: MenuBu
 
   return (
     <SidebarMenuButton asChild isActive={isActive}>
-      <Link href={href}>
-        {IconComponent && <IconComponent className="w-4 h-4" />}
+      <Link href={href != null ? href : '#'}>
+        {IconComponent && <IconComponent className='w-4 h-4' />}
         <span>{title}</span>
       </Link>
     </SidebarMenuButton>
