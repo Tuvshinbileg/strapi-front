@@ -6,16 +6,18 @@ export default function DashboardPage() {
   const dashboardId = '494c8086-5355-4914-9d7f-3496f34c3254';
 
   return (
-    <div className='container mx-auto px-4 py-8'>
-      <h1 className='text-3xl font-bold mb-6'>Борлуулалтын Dashboard</h1>
+    <div className='w-full col-span-full'>
+      <div className='flex flex-col gap-4'>
+        <h1 className='text-3xl font-bold'>Борлуулалтын Dashboard</h1>
 
-      <div className='bg-white rounded-lg shadow-lg p-4 min-h-screen'>
-        <SupersetDashboard
-          dashboardId={dashboardId}
-          hideTitle={false}
-          hideChartControls={false}
-          hideTab={false}
-        />
+        <div className='rounded-lg shadow-lg p-4 w-full min-h-screen'>
+          <SupersetDashboard
+            dashboardId={dashboardId}
+            hideTitle={false}
+            hideChartControls={false}
+            hideTab={false}
+          />
+        </div>
       </div>
     </div>
   );
