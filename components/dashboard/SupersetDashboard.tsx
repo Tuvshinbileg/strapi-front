@@ -109,7 +109,7 @@ export default function SupersetDashboard({
           </div>
         </div>
       )}
-      <div ref={containerRef} className="w-full h-full" />
+      <div ref={containerRef} className="w-full h-full  min-h-screen relative" />
     </div>
   );
 }

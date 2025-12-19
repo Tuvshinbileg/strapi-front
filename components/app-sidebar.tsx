@@ -26,6 +26,10 @@ const data = {
           title: "Project Structure",
           url: "#",
         },
+        {
+          title: "Daily dashboard",
+          url: "dashboard",
+        },
       ],
     },
     {

@@ -56,7 +56,9 @@ export async function POST(request: NextRequest) {
       }
     );
 
+
     if (!guestTokenResponse.ok) {
+      console.error(guestTokenResponse)
       throw new Error('Failed to create guest token');
     }
 
